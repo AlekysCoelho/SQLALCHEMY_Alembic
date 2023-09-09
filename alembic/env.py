@@ -6,6 +6,8 @@ from sqlalchemy import engine_from_config, pool
 from alembic import context
 from infra.configs.base import Base
 from infra.entities.course import Course
+from infra.entities.registration import Registration
+from infra.entities.student import Student
 from infra.entities.teacher import Teacher
 
 # this is the Alembic Config object, which provides

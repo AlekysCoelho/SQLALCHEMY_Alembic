@@ -20,4 +20,4 @@ class Teacher(Base):
     courses: Mapped[Set["tb_course"]] = relationship(back_populates="teacher")
 
     def __repr__(self) -> str:
-        return f"Teacher (id={self.id_teacher}, nome={self.name})"
+        return f"Teacher (id={self.id_teacher}, name={self.name})"
