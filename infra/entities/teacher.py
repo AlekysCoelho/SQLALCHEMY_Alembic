@@ -4,7 +4,6 @@ from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from infra.configs.base import Base
-from infra.entities import Course as tb_course
 
 
 class Teacher(Base):
@@ -17,7 +16,7 @@ class Teacher(Base):
     fullname: Mapped[Optional[str]]
     cpf: Mapped[str] = mapped_column(String(11), nullable=False)
 
-    courses: Mapped[Set["tb_course"]] = relationship(back_populates="teacher")
+    courses = relationship("Course", back_populates="teacher", lazy="subquery")
 
     def __repr__(self) -> str:
         return f"Teacher (id={self.id_teacher}, name={self.name})"

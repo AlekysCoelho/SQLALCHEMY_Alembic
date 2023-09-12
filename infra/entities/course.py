@@ -3,7 +3,6 @@ from typing import Any
 from sqlalchemy import ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-import infra.entities
 from infra.configs.base import Base
 
 
@@ -17,7 +16,7 @@ class Course(Base):
     codigo: Mapped[str] = mapped_column(String(3), nullable=False)
     id_teacher: Mapped[int] = mapped_column(ForeignKey("teachers.id_teacher"))
 
-    teacher: Mapped["infra.entities.Teacher()"] = relationship(uselist=False, back_populates="courses")
+    teacher = relationship("Teacher", uselist=False, back_populates="courses", lazy="subquery")
 
-    def __reduce__(self) -> str:
-        return f"Course (id={self.id_course}, course={self.name}, teacher={self.teacher})"
+    def __repr__(self) -> str:
+        return f"Course (id={self.id_course}, course={self.name})"
