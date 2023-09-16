@@ -1,9 +1,8 @@
-from typing import Optional
+from typing import List, Optional
 
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-import infra.entities
 from infra.configs.base import Base
 
 
@@ -17,9 +16,9 @@ class Student(Base):
     fullname: Mapped[Optional[str]]
     cpf: Mapped[str] = mapped_column(String(11), nullable=False)
 
-    registration: Mapped["infra.entities.Registration()"] = relationship(
-        uselist=False, back_populates="courses"
+    registration = relationship(
+        "Registration", uselist=False, back_populates="student", lazy="subquery"
     )
 
     def __repr__(self) -> str:
-        return f"Student (id={self.id_student}, name={self.name}, registration={self.registration})"
+        return f"Student (id={self.id_student}, name={self.name})"
