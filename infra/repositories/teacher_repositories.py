@@ -20,7 +20,7 @@ class TeacherRepository:
                 raise exception
 
     def selecting_through_a_course(self, course_name: str) -> Type[Teacher] | str:
-        """Seeking teacher and course. Selecting through a course"""
+        """Seeking teacher. Selecting through a course"""
 
         with self.__ConnectHandler() as db:
             try:
@@ -41,10 +41,10 @@ class TeacherRepository:
 
         with self.__ConnectHandler() as db:
             try:
-                data_insert = Teacher(name=name, fullname=fullname, cpf=cpf)
-                db.session.add(data_insert)
+                data = Teacher(name=name, fullname=fullname, cpf=cpf)
+                db.session.add(data)
                 db.session.commit()
-                return
+                return data
             except Exception as exception:
                 db.session.rollback()
                 raise exception
