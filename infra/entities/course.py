@@ -16,7 +16,12 @@ class Course(Base):
     codigo: Mapped[str] = mapped_column(String(3), nullable=False)
     id_teacher: Mapped[int] = mapped_column(ForeignKey("teachers.id_teacher"))
 
-    teacher = relationship("Teacher", uselist=False, back_populates="courses", lazy="subquery")
+    teacher = relationship(
+        "Teacher", uselist=False, back_populates="courses", lazy="subquery"
+    )
+    registration = relationship(
+        "Registration", back_populates="course", lazy="subquery"
+    )
 
     def __repr__(self) -> str:
         return f"Course (id={self.id_course}, course={self.name})"
