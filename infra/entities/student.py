@@ -17,7 +17,7 @@ class Student(Base):
     cpf: Mapped[str] = mapped_column(String(11), nullable=False)
 
     registration = relationship(
-        "Registration", uselist=False, back_populates="student", lazy="subquery"
+        "Registration", uselist=True, back_populates="student", lazy="subquery"
     )
 
     def __repr__(self) -> str:
